@@ -6,7 +6,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "build:ios": "eas build --platform ios",
+    "build:adhoc:ios": "eas build --profile preview --platform ios",
+    "build:store:ios": "eas build --platform ios",
     "submit:ios": "eas submit --platform ios",
     "build:android": "eas build --platform android",
     "web": "expo start --web",
@@ -15,7 +16,7 @@
     "lint:fix": "eslint --ext .js,.jsx ./ --fix"
   },
   "dependencies": {
-    "@expo/simple-spinner": "^1.0.2",
+    "@expo/simple-spinner": "1.0.2",
     "@react-native-async-storage/async-storage": "1.17.11",
     "@react-native-community/slider": "4.2.4",
     "expo": "47.0.9",
@@ -30,7 +31,8 @@
     "react-dom": "18.1.0",
     "react-native": "0.70.5",
     "react-redux": "8.0.5",
-    "redux": "4.2.0"
+    "redux": "4.2.0",
+    "expo-dev-client": "2.0.1"
   },
   "devDependencies": {
     "@babel/core": "7.20.7",
