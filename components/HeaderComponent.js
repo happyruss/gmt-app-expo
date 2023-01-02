@@ -3,7 +3,8 @@ import * as Linking from 'expo-linking'
 import { connect as connectRedux } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
-  Text, TouchableOpacity,
+  Text,
+  TouchableOpacity,
   View,
 } from 'react-native'
 import styles from '../styles'
