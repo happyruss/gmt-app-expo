@@ -26,9 +26,10 @@ import {
   setProcessing,
   ACTIVE_TRACK, setActiveTrack,
 } from './player/actions'
-import tracks from './player/tracks'
+import assets from '../assets/assets'
 import { setRemainingSeconds } from './clock/actions'
 
+const { tracks } = assets
 const voiceSoundObject = new Audio.Sound()
 const natureSoundObject = new Audio.Sound()
 const noiseSoundObject = new Audio.Sound()

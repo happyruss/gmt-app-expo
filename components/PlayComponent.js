@@ -9,13 +9,14 @@ import {
 import _isNull from 'lodash/isNull'
 import PropTypes from 'prop-types'
 import styles from '../styles'
-import pauseButton from '../assets/pause.png'
-import playButton from '../assets/play.png'
+import assets from '../assets/assets'
 import {
   startPlay as startPlayAction,
   stopPlay as stopPlayAction,
   IS_PLAYING, ACTIVE_TRACK,
 } from '../services/player/actions'
+
+const { pause, play } = assets
 
 class PlayComponent extends React.Component {
   render = () => {
@@ -39,7 +40,7 @@ class PlayComponent extends React.Component {
           }}
         >
           <Image
-            source={player.get(IS_PLAYING) ? pauseButton : playButton}
+            source={player.get(IS_PLAYING) ? pause : play}
             style={styles.playButton}
           />
         </TouchableOpacity>

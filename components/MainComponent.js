@@ -7,9 +7,9 @@ import {
   ImageBackground,
 } from 'react-native'
 import { InterruptionModeIOS } from 'expo-av/build/Audio.types'
-import blackBackground from '../assets/blackBackground.jpeg'
 import HeaderComponent from './HeaderComponent'
 import styles from '../styles'
+import assets from '../assets/assets'
 import ControlsComponent from './ControlsComponent'
 import PlayComponent from './PlayComponent'
 import {
@@ -48,7 +48,7 @@ class MainComponent extends React.Component {
         <ImageBackground
             key="imageBackground"
             style={styles.imageBackground}
-            source={blackBackground}
+            source={assets.background}
         >
           {renderArray}
         </ImageBackground>
