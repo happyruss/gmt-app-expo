@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "gmt-app",
+    "name": "Meditation Treks",
     "slug": "gmt-app",
     "version": "2.0.0",
     "orientation": "portrait",
@@ -17,6 +17,7 @@
       "**/*"
     ],
     "ios": {
+      "buildNumber": "3",
       "supportsTablet": true,
       "bundleIdentifier": "com.russellEricDobda.GuidedMeds",
       "config": {
