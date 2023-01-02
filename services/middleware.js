@@ -1,5 +1,6 @@
 import { Audio } from 'expo-av'
 import _isNull from 'lodash/isNull'
+import spinner from '@expo/simple-spinner'
 import { Alert as RnAlert } from 'react-native'
 import {
   BINAURAL_VOLUME,
@@ -24,7 +25,7 @@ import {
   START_PLAY,
   setProcessingComplete,
   setProcessing,
-  ACTIVE_TRACK, setActiveTrack,
+  ACTIVE_TRACK, setActiveTrack, SET_PROCESSING, SET_PROCESSING_COMPLETE,
 } from './player/actions'
 import assets from '../assets/assets'
 import { setRemainingSeconds } from './clock/actions'
@@ -192,6 +193,12 @@ export default function middleware (store) {
       const isPlaying = store.getState().player.toJS()[IS_PLAYING]
       const { type, payload } = action
       switch (type) {
+        case SET_PROCESSING:
+          spinner.start()
+          break
+        case SET_PROCESSING_COMPLETE:
+          spinner.stop()
+          break
         case SET_INITIAL_PRESET:
           assignInitialPreset(store)
           break

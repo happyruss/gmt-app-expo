@@ -15,7 +15,9 @@
     "lint:fix": "eslint --ext .js,.jsx ./ --fix"
   },
   "dependencies": {
+    "@expo/simple-spinner": "^1.0.2",
     "@react-native-async-storage/async-storage": "1.17.11",
+    "@react-native-community/slider": "4.2.4",
     "expo": "47.0.9",
     "expo-av": "13.0.2",
     "expo-keep-awake": "11.0.1",
@@ -28,18 +30,17 @@
     "react-dom": "18.1.0",
     "react-native": "0.70.5",
     "react-redux": "8.0.5",
-    "redux": "4.2.0",
-    "@react-native-community/slider": "4.2.4"
+    "redux": "4.2.0"
   },
   "devDependencies": {
     "@babel/core": "7.20.7",
     "@babel/eslint-parser": "7.19.1",
     "eslint": "8.31.0",
     "eslint-config-airbnb": "19.0.4",
-    "eslint-plugin-no-constructor-bind": "2.0.4",
-    "eslint-plugin-mocha": "10.1.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsx-a11y": "6.6.1",
+    "eslint-plugin-mocha": "10.1.0",
+    "eslint-plugin-no-constructor-bind": "2.0.4",
     "eslint-plugin-react": "7.31.11",
     "eslint-plugin-react-hooks": "4.6.0"
   },
