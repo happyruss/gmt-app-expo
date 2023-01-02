@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-const buttonBackground = '#444'
+const buttonBackground = '#666'
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     height: 20,
     marginLeft: 30,
     marginTop: 10,
-    color: '#fff',
+    color: '#000',
   },
   timerLabel: {
     width: '25%',
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     height: '100%',
     marginLeft: 60,
     marginTop: 10,
-    color: '#fff',
+    color: '#000',
     backgroundColor: '#000',
   },
 

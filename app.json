@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "Meditation Treks",
+    "name": "MedTreks 2",
     "slug": "gmt-app",
     "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash2.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#FFFFFF"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -19,7 +19,7 @@
     "ios": {
       "buildNumber": "3",
       "supportsTablet": true,
-      "bundleIdentifier": "com.russellEricDobda.GuidedMeds",
+      "bundleIdentifier": "com.russellEricDobda.GuidedMeds2",
       "config": {
         "usesNonExemptEncryption": false
       },

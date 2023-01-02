@@ -40,7 +40,7 @@ class HeaderComponent extends React.Component {
             onPress={() => {
               startInit(0)
             }}
-            label="Meet Your Spirit Guide"
+            label="Cleanse a Drama Cycle"
             processing={processing}
           />
           <MeditationButtonComponent
@@ -48,7 +48,7 @@ class HeaderComponent extends React.Component {
             onPress={() => {
               startInit(1)
             }}
-            label="Relationship Healing"
+            label="Ask Your Higher Self a Question"
             processing={processing}
           />
           <MeditationButtonComponent
@@ -56,7 +56,7 @@ class HeaderComponent extends React.Component {
             onPress={() => {
               startInit(2)
             }}
-            label="Reprogram Thoughts"
+            label="Program a Quartz Crystal"
             processing={processing}
           />
           <MeditationButtonComponent
@@ -64,7 +64,7 @@ class HeaderComponent extends React.Component {
             onPress={() => {
               startInit(3)
             }}
-            label="Manifest"
+            label="Send Helpful Thoughts"
             processing={processing}
           />
         </View>
