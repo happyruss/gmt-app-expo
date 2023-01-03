@@ -46,7 +46,7 @@ class ControlsComponent extends React.Component {
     if (secondsRemaining) {
       const minutes = Math.floor(secondsRemaining / 60)
       const seconds = secondsRemaining - minutes * 60
-      timerLabelValue = `${minutes}:${seconds}`
+      timerLabelValue = `${minutes}:${String(seconds).padStart(2, '0')}`
     }
     const brainwaveLabel = preset.get(IS_ISOCHRONIC) ? 'Isochronic' : 'Binaural'
     return (
