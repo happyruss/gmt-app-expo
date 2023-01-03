@@ -15,6 +15,7 @@ import {
   SET_NOISE_VOLUME,
   VOICE_VOLUME,
   setPreset,
+  setIsIsochronic,
 } from './preset/actions'
 import { retrieveInitialPreset, savePreset } from './AsyncStorageManager'
 import {
@@ -25,12 +26,12 @@ import {
   START_PLAY,
   setProcessingComplete,
   setProcessing,
-  ACTIVE_TRACK, setActiveTrack, SET_PROCESSING, SET_PROCESSING_COMPLETE,
+  ACTIVE_TRACK, setActiveTrack, SET_PROCESSING, SET_PROCESSING_COMPLETE, SKIP_INTRO,
 } from './player/actions'
 import assets from '../assets/assets'
-import { setRemainingSeconds } from './clock/actions'
+import { DURATION_MS, setDurationMilliseconds, setRemainingSeconds } from './clock/actions'
 
-const { tracks } = assets
+const { tracks, crystalEndIntroMs } = assets
 const voiceSoundObject = new Audio.Sound()
 const natureSoundObject = new Audio.Sound()
 const noiseSoundObject = new Audio.Sound()
@@ -103,9 +104,11 @@ async function startInit (track, store) {
       dispatch(setActiveTrack(null))
     }
     if (playbackStatus.isPlaying) {
+      const { durationMillis } = playbackStatus
       const remainingSeconds = Math.floor(
-        (playbackStatus.durationMillis - playbackStatus.positionMillis) / 1000,
+        (durationMillis - playbackStatus.positionMillis) / 1000,
       )
+      dispatch(setDurationMilliseconds(durationMillis))
       dispatch(setRemainingSeconds(remainingSeconds))
     }
   })
@@ -133,6 +136,9 @@ async function startInit (track, store) {
     volume: noiseVolume,
     isLooping: false,
   })
+  if (track === 1) {
+    dispatch(setIsIsochronic(false))
+  }
   dispatch(setActiveTrack(track))
   dispatch(setProcessingComplete())
   dispatch(startPlay())
@@ -167,7 +173,7 @@ async function setVolume (soundObject, volume, store) {
   }
 }
 
-async function setIsIsochronic (isIsochronic, volume, store) {
+async function setIsIsochronicMiddleware (isIsochronic, volume, store) {
   const isActive = !_isNull(store.getState().player.get(ACTIVE_TRACK))
   if (isActive) {
     await binauralSoundObject.setVolumeAsync(isIsochronic ? 0 : volume)
@@ -179,6 +185,20 @@ async function assignInitialPreset (store) {
   const { dispatch } = store
   const preset = await retrieveInitialPreset()
   dispatch(setPreset(preset))
+}
+
+async function skipCrystalIntro (store) {
+  const { dispatch } = store
+  const { clock } = store.getState()
+  const durationMs = clock.get(DURATION_MS)
+  dispatch(setProcessing())
+  const position = durationMs - crystalEndIntroMs
+  await voiceSoundObject.setPositionAsync(position)
+  await natureSoundObject.setPositionAsync(position)
+  await binauralSoundObject.setPositionAsync(position)
+  await isoChronicSoundObject.setPositionAsync(position)
+  await noiseSoundObject.setPositionAsync(position)
+  dispatch(setProcessingComplete())
 }
 
 /**
@@ -232,8 +252,15 @@ export default function middleware (store) {
           savePreset(presetStateJs)
           break
         case SET_IS_ISOCHRONIC:
-          setIsIsochronic(presetStateJs[IS_ISOCHRONIC], presetStateJs[BINAURAL_VOLUME], store)
+          setIsIsochronicMiddleware(
+            presetStateJs[IS_ISOCHRONIC],
+            presetStateJs[BINAURAL_VOLUME],
+            store,
+          )
           savePreset(presetStateJs)
+          break
+        case SKIP_INTRO:
+          skipCrystalIntro(store)
           break
         default:
           break

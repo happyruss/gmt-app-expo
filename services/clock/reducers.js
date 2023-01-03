@@ -1,6 +1,7 @@
 import { Map } from 'immutable'
 import {
-  SECONDS_REMAINING,
+  DURATION_MS,
+  SECONDS_REMAINING, SET_DURATION_MILLISECONDS,
   SET_REMAINING_SECONDS,
 } from './actions'
 
@@ -9,6 +10,7 @@ import {
  */
 const initialState = Map({
   [SECONDS_REMAINING]: 0,
+  [DURATION_MS]: 0,
 })
 
 /**
@@ -21,6 +23,10 @@ export default function reducerClock (state = initialState, action) {
     case SET_REMAINING_SECONDS: {
       const { payload: { seconds } = {} } = action
       return state.set(SECONDS_REMAINING, seconds)
+    }
+    case SET_DURATION_MILLISECONDS: {
+      const { payload: { ms } = {} } = action
+      return state.set(DURATION_MS, ms)
     }
     default:
       return state

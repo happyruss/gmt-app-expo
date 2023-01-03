@@ -23,6 +23,7 @@ import playWhite from './play.png'
 import pauseWhite from './pause.png'
 
 export default {
+  crystalEndIntroMs: 1135000,
   background: blackBackground,
   play: playWhite,
   pause: pauseWhite,

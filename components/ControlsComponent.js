@@ -2,7 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import {
   View,
-  Switch, Text,
+  Switch, Text, Button,
 } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect as connectRedux } from 'react-redux'
@@ -19,8 +19,13 @@ import {
   NATURE_VOLUME,
   IS_ISOCHRONIC,
 } from '../services/preset/actions'
+import { ACTIVE_TRACK, skipIntro as skipIntroAction } from '../services/player/actions'
 import SliderComponent from './SliderComponent'
 import { SECONDS_REMAINING } from '../services/clock/actions'
+import assets from '../assets/assets'
+
+const { crystalEndIntroMs } = assets
+const crystalEndIntroSeconds = crystalEndIntroMs / 1000
 
 class ControlsComponent extends React.Component {
   resetContext = (isIsochronic) => {
@@ -38,9 +43,11 @@ class ControlsComponent extends React.Component {
       setNatureVolume,
       setBinauralVolume,
       setIsIsochronic,
+      skipIntro,
       clock,
       player,
     } = props
+    const activeTrack = player.get(ACTIVE_TRACK)
     const secondsRemaining = clock.get(SECONDS_REMAINING)
     let timerLabelValue = ''
     if (secondsRemaining) {
@@ -88,18 +95,31 @@ class ControlsComponent extends React.Component {
           sliderValue={preset.get(BINAURAL_VOLUME)}
         />
         <View key="switchContainer" style={styles.switchAndTimerContainer}>
-          <Switch
-            style={styles.binauralSwitch}
-            key="entrainmentType"
-            onValueChange={(value) => setIsIsochronic(value)}
-            value={preset.get(IS_ISOCHRONIC)}
-          />
+          {
+            activeTrack !== 1
+              ? <Switch
+                style={styles.binauralSwitch}
+                key="entrainmentType"
+                onValueChange={(value) => setIsIsochronic(value)}
+                value={preset.get(IS_ISOCHRONIC)}
+                />
+              : null
+        }
           <Text
             key="timer_label"
             style={styles.timerLabel}
           >
             {`${timerLabelValue}`}
           </Text>
+          {
+            activeTrack === 2 && secondsRemaining > crystalEndIntroSeconds
+              ? <Button
+                title={'Skip Intro'}
+                style={styles.buttonItem}
+                onPress={ () => skipIntro()}
+                />
+              : null
+          }
         </View>
       </View>
     )
@@ -114,12 +134,18 @@ ControlsComponent.propTypes = {
   setVoiceVolume: PropTypes.func.isRequired,
 }
 
-export default connectRedux((state) => ({ ui: state.ui, preset: state.preset, clock: state.clock }),
-  (dispatch) => bindActionCreators({
-    setBinauralVolume: setBinauralVolumeAction,
-    setNatureVolume: setNatureVolumeAction,
-    setIsIsochronic: setIsIsochronicAction,
-    setVoiceVolume: setVoiceVolumeAction,
-    setNoiseVolume: setNoiseVolumeAction,
-  }, dispatch),
+export default connectRedux((state) => ({
+  ui: state.ui,
+  preset: state.preset,
+  clock: state.clock,
+  player: state.player,
+}),
+(dispatch) => bindActionCreators({
+  setBinauralVolume: setBinauralVolumeAction,
+  setNatureVolume: setNatureVolumeAction,
+  setIsIsochronic: setIsIsochronicAction,
+  setVoiceVolume: setVoiceVolumeAction,
+  setNoiseVolume: setNoiseVolumeAction,
+  skipIntro: skipIntroAction,
+}, dispatch),
 )(ControlsComponent)
