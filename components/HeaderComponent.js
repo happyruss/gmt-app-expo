@@ -25,7 +25,7 @@ class HeaderComponent extends React.Component {
             accessibilityLabel={'Go to Website...'}
             style={styles.headerButtonOpacity}
             activeOpacity={0.5}
-            onPress={() => Linking.openURL('http://www.guidedmeditationtreks.com/v1.html')}
+            onPress={() => Linking.openURL('http://www.guidedmeditationtreks.com/v2.html')}
           >
             <Text
               key="headerButtonText"
