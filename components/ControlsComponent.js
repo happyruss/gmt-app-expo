@@ -73,7 +73,7 @@ class ControlsComponent extends React.Component {
           onValueChange={(itemValue) => {
             setNatureVolume(itemValue)
           }}
-          label="Rain"
+          label="Nature"
           sliderValue={preset.get(NATURE_VOLUME)}
         />
         <SliderComponent
@@ -82,7 +82,7 @@ class ControlsComponent extends React.Component {
           onValueChange={(itemValue) => {
             setNoiseVolume(itemValue)
           }}
-          label="Noise"
+          label="Music"
           sliderValue={preset.get(NOISE_VOLUME)}
         />
         <SliderComponent
